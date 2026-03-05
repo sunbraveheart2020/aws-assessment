@@ -67,6 +67,7 @@ module "api_gateway" {
   # Lambda integrations (regional)
   lambda_greet_arn    = module.lambda_greet.lambda_arn
   lambda_dispatch_arn = module.lambda_dispatch.lambda_arn
+  region              = var.region
 }
 
 # Outputs

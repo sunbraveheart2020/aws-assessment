@@ -13,8 +13,8 @@ USERNAME = "sunfangyong2018@gmail.com"
 PASSWORD = "TempPass456!"
 
 API_GW = {
-    "us-east-1": "https://ixksyvg08i.execute-api.us-east-1.amazonaws.com",
-    "eu-west-1": "https://o17c2unnob.execute-api.eu-west-1.amazonaws.com"
+    "us-east-1": "https://yx7dp0g7tk.execute-api.us-east-1.amazonaws.com/prod",
+    "eu-west-1": "https://soen6uxqvh.execute-api.eu-west-1.amazonaws.com/prod"
 }
 
 # STEP 1 — Authenticate with Cognito to get JWT

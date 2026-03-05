@@ -3,7 +3,7 @@ import json
 import boto3
 
 dynamodb = boto3.resource("dynamodb")
-sns = boto3.client("sns")
+sns = boto3.client("sns", region_name="us-east-1")  # SNS is only in us-east-1
 
 TABLE_NAME = os.environ["TABLE_NAME"]
 SNS_TOPIC = os.environ["SNS_TOPIC"]
