@@ -1,0 +1,96 @@
+name: Terraform CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  terraform:
+    name: Terraform Global + Regional Pipeline
+    runs-on: ubuntu-latest
+
+    env:
+      TF_IN_AUTOMATION: true
+
+    steps:
+      # ----------------------------------------------------
+      # Checkout repository
+      # ----------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ----------------------------------------------------
+      # Install Terraform
+      # ----------------------------------------------------
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      # ----------------------------------------------------
+      # Lint / Format Check
+      # ----------------------------------------------------
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+      # ----------------------------------------------------
+      # Security Scan (tfsec)
+      # ----------------------------------------------------
+      - name: Run tfsec security scan
+        uses: aquasecurity/tfsec-action@v1.0.3
+
+      # ----------------------------------------------------
+      # Global Terraform Init + Validate + Plan
+      # ----------------------------------------------------
+      - name: Terraform Init (global)
+        working-directory: ./global
+        run: terraform init
+
+      - name: Terraform Validate (global)
+        working-directory: ./global
+        run: terraform validate
+
+      - name: Terraform Plan (global)
+        working-directory: ./global
+        run: terraform plan -no-color
+
+      # ----------------------------------------------------
+      # Regional us-east-1 Init + Validate + Plan
+      # ----------------------------------------------------
+      - name: Terraform Init (us-east-1)
+        working-directory: ./regional/us-east-1
+        run: terraform init
+
+      - name: Terraform Validate (us-east-1)
+        working-directory: ./regional/us-east-1
+        run: terraform validate
+
+      - name: Terraform Plan (us-east-1)
+        working-directory: ./regional/us-east-1
+        run: terraform plan -no-color
+
+      # ----------------------------------------------------
+      # Regional eu-west-1 Init + Validate + Plan
+      # ----------------------------------------------------
+      - name: Terraform Init (eu-west-1)
+        working-directory: ./regional/eu-west-1
+        run: terraform init
+
+      - name: Terraform Validate (eu-west-1)
+        working-directory: ./regional/eu-west-1
+        run: terraform validate
+
+      - name: Terraform Plan (eu-west-1)
+        working-directory: ./regional/eu-west-1
+        run: terraform plan -no-color
+
+      # ----------------------------------------------------
+      # Test Execution Placeholder
+      # ----------------------------------------------------
+      - name: Run automated test script (placeholder)
+        run: |
+          echo "Running post-deployment tests..."
+          echo "Python test script would run."
+          echo "Example: python3 testscript/testscript.py"

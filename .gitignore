@@ -1,0 +1,15 @@
+/global/.terraform/*
+/global/*.lock.hcl
+/global/*.tfstate
+/global/*.tfstate.backup
+
+/regional/eu-west-1/.terraform/*
+/regional/us-east-1/.terraform/*
+/regional/eu-west-1/*.tfstate
+/regional/us-east-1/*.tfstate
+/regional/eu-west-1/*.tfstate.backup
+/regional/us-east-1/*.tfstate.backup
+/regional/eu-west-1/*.lock.hcl
+/regional/us-east-1/*.lock.hcl
+/regional/modules/lambda_greet/lambda/*.zip
+/regional/modules/lambda_dispatch/lambda/*.zip
