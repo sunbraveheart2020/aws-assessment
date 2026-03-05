@@ -10,5 +10,5 @@ variable "email" {
 
 variable "repo" {
   type = string
-  default = "TBC"
+  default = "https://github.com/sunbraveheart2020/aws-assessment"
 }
